@@ -1,6 +1,13 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 require("dotenv").config();
+
+app.use(
+  cors({
+    origin: "https://sse-example.webflow.io",
+  })
+);
 
 // Middleware to parse JSON POST requests
 app.use(express.json());
@@ -13,10 +20,6 @@ app.get("/events", (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://sse-example.webflow.io"
-  );
   res.flushHeaders();
 
   // Send an initial event
