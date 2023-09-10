@@ -1,3 +1,9 @@
+const PORT = process.env.PORT || 8080; // If process.env.PORT is undefined, fall back to 8080
+
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+});
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
