@@ -1,4 +1,6 @@
-const eventSource = new EventSource("http://localhost:8080/events");
+const eventSource = new EventSource(
+  "https://sse-example-3dea67fbca95.herokuapp.com/events"
+);
 const toasterPanel = document.querySelector(".toaster");
 const toasterLink = document.querySelector(".toaster-link");
 const toasterText = document.querySelector(".toaster-text");
@@ -15,12 +17,9 @@ eventSource.onmessage = (event) => {
     const data = JSON.parse(event.data);
 
     if (data.alert) {
-      console.log("this is an alert");
+      console.log(`Received event: ${data.message}, ${data.link}`);
       toasterText.innerText = data.message;
       toasterLink.href = data.link;
-
-      // Assuming "visible" class will make the panel visible,
-      // make sure the initial CSS of .toaster sets display to none or similar
       toasterPanel.style.display = "block";
       toasterPanel.classList.add("visible");
     } else {
