@@ -32,6 +32,13 @@ app.get("/events", (req, res) => {
   const welcomeData = JSON.stringify({ message: "Welcome to the SSE server!" });
   res.write(`data: ${welcomeData}\n\n`);
 
+  const heartBeatData = JSON.stringify({
+    message: "Listening to Webflow conf server",
+  });
+  const heartbeat = setInterval(() => {
+    res.write(`data: ${heartBeatData}\n\n`);
+  }, 25000); // Send a ping every 25 seconds
+
   // Add this client to the clients list
   clients.push(res);
 
